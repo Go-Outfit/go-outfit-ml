@@ -1,1 +1,1 @@
-# go-outfit-ml
+# Go Outfit Machine Learning Repository
