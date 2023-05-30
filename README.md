@@ -1,1 +1,1 @@
-# go-outfit-ml
+# go-outfit-machine-learning
