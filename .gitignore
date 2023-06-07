@@ -1,3 +1,5 @@
 
 # except pycache
 __pycache__/
+
+.env

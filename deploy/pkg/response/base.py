@@ -4,7 +4,7 @@ import http
 
 class BaseResponse:
     def __init__(self, code, message, errors, data):
-        self.code = code
+        self.code = int(code)
         self.message = message
         self.errors = errors
         self.data = data
@@ -13,12 +13,10 @@ class BaseResponse:
         return jsonify({"code": self.code, "message": self.message, "errors": self.errors, "data": self.data})
 
 
-response_message = {
-    "success": http.HTTPStatus.OK,
-    "bad_request": http.HTTPStatus.BAD_REQUEST,
-    "internal_server_error": http.HTTPStatus.INTERNAL_SERVER_ERROR
-}
 
 
 def success_response(data):
-    return BaseResponse(200, response_message["success"].phrase, None, data).json()
+    return BaseResponse(200, http.HTTPStatus.OK.phrase, None, data).json()
+
+def error_response(error,code):
+    return BaseResponse(code, code.phrase, error, None).json()
