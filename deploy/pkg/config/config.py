@@ -1,6 +1,7 @@
 from imagekitio import ImageKit
 import dotenv
 import os
+import csv
 
 
 def init_imagekit_client(public_key, private_key, url):
@@ -13,7 +14,6 @@ def init_imagekit_client(public_key, private_key, url):
 
 
 def init_env_variables():
-    dotenv.load_dotenv()
 
     class EnvVariables:
         def __init__(self):
@@ -23,3 +23,22 @@ def init_env_variables():
 
     env = EnvVariables()
     return env
+
+
+def load_csv_data():
+    first = True
+    with open('./deploy/data.csv', 'r', encoding='UTF8', newline='') as f:
+        csvreader = csv.reader(f)
+        dataset = {}
+        for row in csvreader:
+            if first:
+                first = False
+                continue
+            if row[1] not in dataset:
+                dataset[row[1]] = {}
+
+            if row[2] not in dataset[row[1]]:
+                dataset[row[1]][row[2]] = [row[0]]
+            else:
+                dataset[row[1]][row[2]].append(row[0])
+        return dataset

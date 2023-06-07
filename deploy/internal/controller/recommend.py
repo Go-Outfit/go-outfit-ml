@@ -4,17 +4,25 @@ import flask_expects_json as validator
 import http
 from internal.model.model import RecommenderRequestBody
 from werkzeug.exceptions import BadRequest
+import pkg.config.config as config
+import internal.service.recommend as recommendation_service
 
 
 def ping():
     return response.success_response("pong")
 
 
+dataset = config.load_csv_data()
+
+
 @validator.expects_json(RecommenderRequestBody)
 def recommend():
-    data = request.json
-    print(data)
-    return response.success_response("recommend")
+    req = request.json
+    # data = request.get_data
+    res = recommendation_service.OutfitRecommender(
+        req["gender"], req["weather"], req["situation"], req["fashion_style"], dataset=dataset)
+    res = res.recommend()
+    return response.success_response(res)
 
 
 def handle_bad_request(e: BadRequest):
