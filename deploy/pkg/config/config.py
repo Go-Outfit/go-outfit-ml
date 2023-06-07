@@ -1,33 +1,36 @@
-from imagekitio import ImageKit
+# from imagekitio import ImageKit
 import dotenv
 import os
 import csv
 
 
-def init_imagekit_client(public_key, private_key, url):
-    imagekit = ImageKit(
-        public_key=public_key,
-        private_key=private_key,
-        url_endpoint=url
-    )
-    return imagekit
+# def init_imagekit_client(public_key, private_key, url):
+#     imagekit = ImageKit(
+#         public_key=public_key,
+#         private_key=private_key,
+#         url_endpoint=url
+#     )
+#     return imagekit
 
 
-def init_env_variables():
+# def init_env_variables():
 
-    class EnvVariables:
-        def __init__(self):
-            self.imagekit_public_key = os.getenv("IMAGEKIT_PUBLIC_KEY"),
-            self.imagekit_private_key = os.getenv("IMAGEKIT_PRIVATE_KEY"),
-            self.imagekit_endpoint_url = os.getenv("IMAGEKIT_ENDPOINT_URL"),
+#     class EnvVariables:
+#         def __init__(self):
+#             self.imagekit_public_key = os.getenv("IMAGEKIT_PUBLIC_KEY"),
+#             self.imagekit_private_key = os.getenv("IMAGEKIT_PRIVATE_KEY"),
+#             self.imagekit_endpoint_url = os.getenv("IMAGEKIT_ENDPOINT_URL"),
 
-    env = EnvVariables()
-    return env
+#     env = EnvVariables()
+#     return env
 
 
 def load_csv_data():
+    file_path = __file__
+    file_path = os.path.join(os.path.dirname(file_path), "data.csv")
+
     first = True
-    with open('./deploy/data.csv', 'r', encoding='UTF8', newline='') as f:
+    with open(file_path, 'r', encoding='UTF8', newline='') as f:
         csvreader = csv.reader(f)
         dataset = {}
         for row in csvreader:

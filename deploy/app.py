@@ -9,13 +9,12 @@ app = server.initialize_flask_app()
 dotenv.load_dotenv()
 dataset = config.load_csv_data()
 bootstrapper.initialize_routes(app, dataset)
-print(__file__)
 
 
 # @app.route("/")
 # def ping():
 #     return "Hello World"
-env = config.init_env_variables()
+# env = config.init_env_variables()
 # imagekit = config.init_imagekit_client(
 #     env.imagekit_public_key[0], env.imagekit_private_key[0], env.imagekit_endpoint_url[0])
 
