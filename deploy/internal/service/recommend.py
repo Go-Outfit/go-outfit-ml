@@ -4,8 +4,8 @@ import pkg.config.config as config
 import os
 
 
-laki_dir = "Laki-laki"
-cewek_dir = "Perempuan"
+laki_dir = "male"
+cewek_dir = "female"
 base_dir = "."
 
 
@@ -41,10 +41,10 @@ class OutfitRecommender:
         dataset = self.dataset
 
         if gender == "male" and situation == "formal" and fashion_style == "formal":
-            upperwear = recommend_output(laki_dir, 'jas', dataset)
+            upperwear = recommend_output(laki_dir, 'coat-shirt', dataset)
             bottomwear = recommend_output(
-                laki_dir, 'Celana_panjang_cowo', dataset)
-            footwear = recommend_output(laki_dir, 'pantofel', dataset)
+                laki_dir, 'trousers', dataset)
+            footwear = recommend_output(laki_dir, 'loafers', dataset)
             result = {
                 "upperwear": [upperwear],
                 "bottomwear": [bottomwear],
@@ -53,19 +53,19 @@ class OutfitRecommender:
             return result
         elif gender == "female" and situation == "formal" and fashion_style == "formal":
             upperwear = []
-            val = recommend_output(cewek_dir, 'jas_cewe', dataset)
+            val = recommend_output(cewek_dir, 'coat-shirt', dataset)
             upperwear.append(val)
             val = recommend_output(cewek_dir, 'dress', dataset)
             upperwear.append(val)
 
             bottomwear = []
-            val = recommend_output(cewek_dir, 'rok_formal', dataset)
+            val = recommend_output(cewek_dir, 'formal-skirt', dataset)
             bottomwear.append(val)
-            val = recommend_output(cewek_dir, 'cp_cewe', dataset)
+            val = recommend_output(cewek_dir, 'trousers', dataset)
             bottomwear.append(val)
 
             footwear = []
-            val = recommend_output(cewek_dir, 'pantofel_cewe', dataset)
+            val = recommend_output(cewek_dir, 'loafers', dataset)
             footwear.append(val)
             val = recommend_output(cewek_dir, 'heels', dataset)
             footwear.append(val)
@@ -78,21 +78,21 @@ class OutfitRecommender:
             return result
         elif gender == "male" and situation == "non_formal" and fashion_style != "formal":
             upperwear = []
-            val = recommend_output(base_dir, 'Jacket', dataset)
+            val = recommend_output(base_dir, 'jacket', dataset)
             upperwear.append(val)
-            val = recommend_output(laki_dir, 'kaos_cowok', dataset)
+            val = recommend_output(laki_dir, 'tshirt', dataset)
             upperwear.append(val)
 
             bottomwear = []
-            val = recommend_output(laki_dir, 'Celana_panjang_cowo', dataset)
+            val = recommend_output(laki_dir, 'trousers', dataset)
             bottomwear.append(val)
-            val = recommend_output(laki_dir, 'celana_pendek', dataset)
+            val = recommend_output(laki_dir, 'pants', dataset)
             bottomwear.append(val)
 
             footwear = []
             val = recommend_output(base_dir, 'sneakers', dataset)
             footwear.append(val)
-            val = recommend_output(laki_dir, 'sandal', dataset)
+            val = recommend_output(laki_dir, 'slippers', dataset)
             footwear.append(val)
 
             result = {
@@ -103,23 +103,23 @@ class OutfitRecommender:
             return result
         elif gender == "female" and situation == "non_formal" and fashion_style != "formal":
             upperwear = []
-            val = recommend_output(base_dir, 'Jacket', dataset)
+            val = recommend_output(base_dir, 'jacket', dataset)
             upperwear.append(val)
-            val = recommend_output(cewek_dir, 'kaos_cewe', dataset)
+            val = recommend_output(cewek_dir, 'tshirt', dataset)
             upperwear.append(val)
             val = recommend_output(cewek_dir, 'onepiece', dataset)
             upperwear.append(val)
 
             bottomwear = []
-            val = recommend_output(cewek_dir, 'rok_non', dataset)
+            val = recommend_output(cewek_dir, 'non-formal-skirt', dataset)
             bottomwear.append(val)
-            val = recommend_output(cewek_dir, 'cp_cewe', dataset)
+            val = recommend_output(cewek_dir, 'trousers', dataset)
             bottomwear.append(val)
 
             footwear = []
             val = recommend_output(base_dir, 'sneakers', dataset)
             footwear.append(val)
-            val = recommend_output(cewek_dir, 'sandal', dataset)
+            val = recommend_output(cewek_dir, 'slippers', dataset)
             footwear.append(val)
             result = {
                 "upperwear": upperwear,
