@@ -18,6 +18,6 @@ bootstrapper.initialize_routes(app, dataset)
 # imagekit = config.init_imagekit_client(
 #     env.imagekit_public_key[0], env.imagekit_private_key[0], env.imagekit_endpoint_url[0])
 
-
-app.config['JSON_SORT_KEYS'] = False
-app.run(port="8080")
+if __name__ == "__main__":
+    app.config['JSON_SORT_KEYS'] = False
+    app.run(port="8080")
