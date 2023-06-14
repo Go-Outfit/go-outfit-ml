@@ -13,6 +13,7 @@ def ping():
 
 
 dataset = config.load_csv_data()
+conditions_data = config.load_condition_data()
 
 
 @validator.expects_json(RecommenderRequestBody)
@@ -20,7 +21,7 @@ def recommend():
     req = request.json
     # data = request.get_data
     res = recommendation_service.OutfitRecommender(
-        req["gender"], req["weather"], req["situation"], req["fashion_style"], dataset=dataset)
+        req["gender"], req["weather"], req["situation"], req["fashion_style"], dataset=dataset, conditions=conditions_data)
     res = res.recommend()
     return response.success_response(res)
 

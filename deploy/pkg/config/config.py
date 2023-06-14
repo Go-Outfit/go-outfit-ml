@@ -2,6 +2,7 @@
 import dotenv
 import os
 import csv
+import hashlib
 
 
 # def init_imagekit_client(public_key, private_key, url):
@@ -45,3 +46,32 @@ def load_csv_data():
             else:
                 dataset[row[1]][row[2]].append(row[0])
         return dataset
+
+def hash_value(value):
+    return hashlib.sha256(value.encode('utf-8')).hexdigest()
+
+def load_condition_data():
+    file_path = __file__
+    file_path = os.path.join(os.path.dirname(file_path),"../../condition_data.csv")
+
+    first = True
+    with open(file_path, 'r', encoding='UTF8', newline='') as f:
+        csvreader = csv.reader(f)
+        conditions = {}
+        for row in csvreader:
+            if first:
+                first = False
+                continue
+            concat = row[0]+row[1]+row[2]+row[3]
+            key = hash_value(concat)
+            upperwears = row[4].split(";")
+            bottomwears = row[5].split(";")
+            footwears = row[6].split(";")
+            conditions[key] = {
+                "upperwear": upperwears,
+                "bottomwear": bottomwears,
+                "footwear": footwears,
+            }
+
+        return conditions
+
